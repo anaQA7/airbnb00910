@@ -9,7 +9,7 @@ interface AboutcomponentProps {
 }
 
 const Aboutcomponent = ({
-  bio = "Travel enthusiast and photographer. Love exploring new cultures and meeting people from around the world. Host since 2019.",
+  bio = "Travel enthusiast and photographer. Love exploring new cultures and meeting people from around the world. Host since 2019.Test",
   isEditing = false,
   onBioChange,
   className = "",

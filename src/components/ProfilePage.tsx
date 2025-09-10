@@ -123,72 +123,66 @@ const ProfilePage = ({ onBack }: ProfilePageProps) => {
           <div className="lg:col-span-1">
             <Card className="bg-white">
               <CardContent className="p-6">
-                <div className="text-center">
-                  <div className="relative inline-block">
-                    <Avatar className="h-32 w-32 mx-auto">
-                      <AvatarImage
-                        src="https://api.dicebear.com/7.x/avataaars/svg?seed=sarah"
-                        alt={profile.name}
-                      />
-                      <AvatarFallback className="text-2xl">SJ</AvatarFallback>
-                    </Avatar>
-                    {isEditing && (
-                      <Button
-                        size="icon"
-                        className="absolute bottom-0 right-0 rounded-full h-8 w-8"
-                      >
-                        <Camera className="h-4 w-4" />
-                      </Button>
-                    )}
-                  </div>
-
-                  <div className="mt-4">
-                    {isEditing ? (
-                      <Input
-                        value={profile.name}
-                        onChange={(e) =>
-                          setProfile({ ...profile, name: e.target.value })
-                        }
-                        className="text-center text-xl font-bold"
-                      />
-                    ) : (
-                      <h2 className="text-xl font-bold">{profile.name}</h2>
-                    )}
-
-                    <div className="flex items-center justify-center mt-2 text-gray-600">
-                      <MapPin className="h-4 w-4 mr-1" />
-                      {isEditing ? (
-                        <Input
-                          value={profile.location}
-                          onChange={(e) =>
-                            setProfile({ ...profile, location: e.target.value })
-                          }
-                          className="text-center"
+                <Separator className="my-6" />
+                <div className="space-y-4">
+                  <div className="text-center">
+                    <div className="relative inline-block">
+                      <Avatar className="h-32 w-32 mx-auto">
+                        <AvatarImage
+                          src="https://api.dicebear.com/7.x/avataaars/svg?seed=sarah"
+                          alt={profile.name}
                         />
-                      ) : (
-                        <span>{profile.location}</span>
+                        <AvatarFallback className="text-2xl">SJ</AvatarFallback>
+                      </Avatar>
+                      {isEditing && (
+                        <Button
+                          size="icon"
+                          className="absolute bottom-0 right-0 rounded-full h-8 w-8"
+                        >
+                          <Camera className="h-4 w-4" />
+                        </Button>
                       )}
                     </div>
+
+                    <div className="mt-4">
+                      {isEditing ? (
+                        <Input
+                          value={profile.name}
+                          onChange={(e) =>
+                            setProfile({ ...profile, name: e.target.value })
+                          }
+                          className="text-center text-xl font-bold"
+                        />
+                      ) : (
+                        <h2 className="text-xl font-bold">{profile.name}</h2>
+                      )}
+
+                      <div className="flex items-center justify-center mt-2 text-gray-600">
+                        <MapPin className="h-4 w-4 mr-1" />
+                        {isEditing ? (
+                          <Input
+                            value={profile.location}
+                            onChange={(e) =>
+                              setProfile({
+                                ...profile,
+                                location: e.target.value,
+                              })
+                            }
+                            className="text-center"
+                          />
+                        ) : (
+                          <span>{profile.location}</span>
+                        )}
+                      </div>
+                    </div>
+
+                    {profile.verified && (
+                      <Badge className="mt-3 bg-green-100 text-green-800">
+                        ✓ Verified
+                      </Badge>
+                    )}
                   </div>
-
-                  {profile.verified && (
-                    <Badge className="mt-3 bg-green-100 text-green-800">
-                      ✓ Verified
-                    </Badge>
-                  )}
-                </div>
-
-                <Separator className="my-6" />
-
-                <div className="space-y-4">
-                  <Aboutcomponent
-                    bio={profile.bio}
-                    isEditing={isEditing}
-                    onBioChange={(bio) => setProfile({ ...profile, bio })}
-                  />
-
                   <div>
-                    <h3 className="font-semibold mb-2">Languages</h3>
                     <div className="flex flex-wrap gap-2">
                       {profile.languages.map((lang) => (
                         <Badge key={lang} variant="secondary">
@@ -197,6 +191,13 @@ const ProfilePage = ({ onBack }: ProfilePageProps) => {
                       ))}
                     </div>
                   </div>
+                  <Aboutcomponent
+                    bio={profile.bio}
+                    isEditing={isEditing}
+                    onBioChange={(bio) => setProfile({ ...profile, bio })}
+                  >
+                    <h3 className="font-semibold mb-2">Languages</h3>
+                  </Aboutcomponent>
 
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
@@ -208,7 +209,6 @@ const ProfilePage = ({ onBack }: ProfilePageProps) => {
                       <p className="text-gray-600">{profile.responseTime}</p>
                     </div>
                   </div>
-
                   <div className="text-sm">
                     <span className="font-semibold">Joined:</span>
                     <p className="text-gray-600">{profile.joinDate}</p>
